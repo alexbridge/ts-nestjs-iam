@@ -1,0 +1,25 @@
+{
+  "method": "POST",
+  "url": "/api/user/registration/#{UUID()}",
+  "body": {
+    "user": {
+      "firstName": "User",
+      "fullName": "User",
+      "email": "user@iam.io",
+      "password": "#{userPassword}",
+      "memberships": [
+        {
+          "groupId": "#{groupOneId}"
+        },
+        {
+          "groupId": "#{groupTwoId}"
+        }
+      ]
+    },
+    "registration": {
+      "applicationId": "#{applicationId}",
+      "verified": true
+    },
+    "skipRegistrationVerification": true
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "method": "POST",
+  "url": "/api/user/registration/00000000-0000-0000-0000-000000000001",
+  "body": {
+    "user": {
+      "email": "#{adminEmail}",
+      "firstName": "Admin",
+      "fullName": "Admin",
+      "lastName": "Admin",
+      "password": "#{adminPassword}"
+    },
+    "registration": {
+      "applicationId": "#{FUSIONAUTH_APPLICATION_ID}",
+      "roles": [
+        "admin"
+      ],
+      "verified": true
+    },
+    "skipRegistrationVerification": true
+  }
+}

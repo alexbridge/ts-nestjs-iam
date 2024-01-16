@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16.0-alpine
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-root}
+      - POSTGRES_USER=${POSTGRES_USER:-root}
+    restart: unless-stopped
+    healthcheck:
+      test: pg_isready -U ${POSTGRES_USER:-root}
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+
+  fusionauth:
+    image: ${COMPOSE_PROJECT_NAME}/fusionauth:latest
+    build:
+      context: ./fusionauth
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/${FUSIONAUTH_DB_NAME}
+      DATABASE_USERNAME: ${FUSIONAUTH_DB_USERNAME}
+      DATABASE_PASSWORD: ${FUSIONAUTH_DB_PASSWORD}
+      FUSIONAUTH_APP_MEMORY: ${FUSIONAUTH_MEMORY:-256M}
+      FUSIONAUTH_APP_RUNTIME_MODE: ${FUSIONAUTH_APP_RUNTIME_MODE}
+      FUSIONAUTH_APP_SILENT_MODE: ${FUSIONAUTH_APP_SILENT_MODE}
+      FUSIONAUTH_APP_URL: ${FUSIONAUTH_BASE_PATH}
+      FUSIONAUTH_API_KEY: ${FUSIONAUTH_API_KEY}
+      FUSIONAUTH_APP_ID: ${FUSIONAUTH_APP_ID}
+      FUSIONAUTH_SECRET: ${FUSIONAUTH_SECRET}
+      FUSIONAUTH_APP_KICKSTART_FILE: /usr/local/fusionauth/kickstart/kickstart.json
+    volumes:
+      - ./fusionauth/kickstart:/usr/local/fusionauth/kickstart:ro,z
+    healthcheck:
+      test: curl -f http://localhost:9011
+      start_period: 10s
+      interval: 5s
+      timeout: 1s
+      retries: 30

@@ -1,0 +1,16 @@
+{
+  "method": "POST",
+  "url": "/api/group/#{groupOneId}",
+  "body": {
+    "group": {
+      "name": "Group (default)",
+      "data": {
+        "description": "This is default group for new users",
+        "default": true
+      }
+    },
+    "roleIds": [
+      "#{roleOneId}"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "method": "POST",
+  "url": "/api/application/#{applicationId}",
+  "body": {
+    "application": {
+      "name": "NestJs",
+      "roles": [
+        {
+          "id": "#{roleOneId}",
+          "name": "role_one",
+          "isDefault": true
+        },
+        {
+          "id": "#{roleTwoId}",
+          "name": "role_two"
+        }
+      ],
+      "jwtConfiguration": {
+        "enabled": true,
+        "accessTokenKeyId": "#{jwtKeyId}",
+        "idTokenKeyId": "#{jwtKeyId}",
+        "refreshTokenTimeToLiveInMinutes": 43200,
+        "timeToLiveInSeconds": 86400
+      },
+      "loginConfiguration": {
+        "allowTokenRefresh": true,
+        "generateRefreshTokens": true,
+        "requireAuthentication": true
+      },
+      "verifyRegistration": false
+    }
+  }
+}

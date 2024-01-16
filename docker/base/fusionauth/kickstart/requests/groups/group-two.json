@@ -1,0 +1,12 @@
+{
+  "method": "POST",
+  "url": "/api/group/#{groupTwoId}",
+  "body": {
+    "group": {
+      "name": "Group two"
+    },
+    "roleIds": [
+      "#{roleTwoId}"
+    ]
+  }
+}

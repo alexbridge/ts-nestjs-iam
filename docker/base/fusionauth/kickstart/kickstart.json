@@ -1,0 +1,30 @@
+{
+  "variables": {
+    "defaultTenantId": "39993728-273b-4def-9b31-a8b57abf15e4",
+    "apiKey": "#{ENV.FUSIONAUTH_API_KEY}",
+    "applicationId": "#{ENV.FUSIONAUTH_APP_ID}",
+    "applicationSecret": "#{ENV.FUSIONAUTH_SECRET}",
+    "adminEmail": "admin@iam.io",
+    "adminPassword": "admin.iam",
+    "userPassword": "user.iam",
+    "jwtKeyId": "#{UUID()}",
+    "roleOneId": "#{UUID()}",
+    "roleTwoId": "#{UUID()}",
+    "groupOneId": "#{UUID()}",
+    "groupTwoId": "#{UUID()}"
+  },
+  "apiKeys": [
+    {
+      "key": "#{apiKey}",
+      "description": "API key"
+    }
+  ],
+  "requests": [
+    "&{requests/keys/jwt-secret-import.json}",
+    "&{requests/users/admin.json}",
+    "&{requests/applications/application.json}",
+    "&{requests/groups/group-one.json}",
+    "&{requests/groups/group-two.json}",
+    "&{requests/users/user-one.json}"
+  ]
+}
