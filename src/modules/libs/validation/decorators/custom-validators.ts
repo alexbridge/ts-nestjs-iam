@@ -8,7 +8,10 @@ export function IsNotBlank(property?: string, validationOptions?: ValidationOpti
       target: object.constructor,
       propertyName: propertyName,
       constraints: [property],
-      options: validationOptions,
+      options: {
+        message: `${propertyName} must not be blank`,
+        ...validationOptions,
+      },
       validator: {
         validate(value: any) {
           if (Array.isArray(value)) {

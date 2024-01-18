@@ -86,6 +86,7 @@ export class AuthService {
       userId: response.user.id,
       userName: response.user.username || response.user.fullName,
       roles: this.fusionAuthUserService.getRoles(response),
+      data: response.user.data,
     } as ApiAuthLoginResponse;
   }
 }

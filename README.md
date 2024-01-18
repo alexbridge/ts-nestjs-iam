@@ -14,11 +14,20 @@
 
    - enter `docker/base` folder, eg. `cd docker/base`
    - start docker services `make local-start`
+     - Fusionauth run at [http://localhost:9011](http://localhost:9011)
+       - admin: admin@iam.io
+       - password: admin.iam
+     - PostgreSQL run at port 5432
 
-2. Start NestJS for local development
+2. Run typeorm migrations
+
+   - `npm run migration:run`
+
+3. Start NestJS for local development
 
    - start NestJS in watch mode `npm run start:dev`
+     - Nestjs run at port 3000
 
-3. Open [./postman/api-user-login.rest](./postman/api-user-login.rest) in VSCode
+4. Open [./postman/api-user-login.rest](./postman/api-user-login.rest) in VSCode
 
    - run requests and check responses

@@ -14,7 +14,9 @@ export class ApiUserRegisterRequest {
   @IsNotBlank()
   @IsEmail()
   @MaxLength(255)
-  @Validate(UniqueEmailValidator)
+  @Validate(UniqueEmailValidator, {
+    message: 'E-mail already taken',
+  })
   email: string;
 
   @IsString()
